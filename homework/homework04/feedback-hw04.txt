@@ -1,0 +1,63 @@
+
+
+Evaluation Criteria ~ homework04
+CMSI 2210 Section 03 Fall 2023
+=================================
+
+LOGIC DESIGN
+   Logic Question 1a         10 pts.
+   Logic Question 1b          3 pts.
+   Logic Question 2          10 pts.
+
+REGISTER OPERATIONS
+   Register clear even        2 pts.
+   Register set last 3        2 pts.
+   Reg./8 remainder           2 pts.
+   Reg. set to -1             2 pts.
+   Reg. invert 2 MSBs         2 pts.
+   Register computation       2 pts.
+
+STANLEY/PENGUIN ASSEMBLY
+   Q4 - program 1a           11 pts.
+   Q5 - program 1b           11 pts.
+   Q6 - GCD prog.            10 pts.
+   Q7 - swap frag             5 pts.
+   Q8 - jmp to addr           5 pts.
+
+REGISTER INVESTIGATION
+   Q9a - high level expl.     5 pts.
+   Q9b - Why?                 5 pts.
+
+
+Total possible points        90 points
+
+========================================================
+
+TOTAL EARNED POINTS:
+   you earned 87.0/ 90.0 which is 96.67% which is an A
+
+========================================================
+SPECIFIC COMMENTS/FEEDBACK:
+
+On problem 1b, should be X :=(A NAND A) NAND (B NAND C)
+                     and Y := A NAND (C NAND C)
+
+On problem 6, kind of a novel way to calculate the GCD here.  Did you try
+looking at Euclid's algorithm for this?  Also you've mixed your variable
+names using "gcd" and "gcf"...  oops
+
+On problem 7, you didn't need to write an entire program, just a fragment.
+
+Otherwise, Nice work!
+
+========================================================
+SEMESTER SCORE SO FAR:
+
+   homework01 ~ 100.00% of  5 points =  5.00 points
+   homework02 ~  97.50% of  5 points =  4.88 points
+   homework03 ~ 100.00% of  5 points =  5.00 points
+   homework04 ~  96.67% of  5 points =  4.83 points
+                                total: 19.71 out of 20.0 = 98.57%
+                                which is an A-plus
+
+Keep up the good work!

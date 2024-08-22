@@ -1,0 +1,4 @@
+test text document for wordcount.c
+Is this a word: osuhgflabkasb798o21u[`84uhk?
+	how about words over here 2=2 jb2
+19 words

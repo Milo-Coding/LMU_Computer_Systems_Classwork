@@ -1,0 +1,82 @@
+Answers to homework 4
+
+1. X := A OR (B AND C)
+   Y := NOT-A OR C
+
+   X := (A NAND A) NAND ( ((B NAND C) NAND (B NAND C)) NAND ((B NAND C) NAND (B NAND C)) )
+   Y := ( (A NAND A) NAND (A NAND A) ) NAND (C NAND C)
+
+2. Circuit diagram in PNG
+
+3. a. AND   0xAAAAAAAA      ; Clear even bits by ANDing with the mask (all even bits as 0s and all odd bits as 1s)
+   b. OR    0x00000007      ; Set the last three bits by ORing with the mask (just the last 3 bits active)
+   c. AND   0x00000007      ; Use bitwise AND with 0x00000007 to keep only the remainder (value < 8)
+   d. OR    0xFFFFFFFF      ; Set all bits to 1 (this is -1 in a signed interpretation) by ORing
+   e. XOR   0xC0000000      ; Complement the two highest order bits by XORing with the hightest order bits set to 1s
+   f. AND   0xFFFFFFF8      ; Clear the remainder to set our initial value equal to the largest multiple of 8 less than or equal to itself
+
+4.      JMP     start   ; begin by jumping over the data area
+ count: 0               ; store the current counter value here
+ limit: 256             ; we'll be counting up to one less than this amount because of how the code is set up
+ start: LOAD count      ; bring the value into accumulator to use
+        WRITE   0x8     ; output the current count to port 8
+        ADD     0x01    ; adding 1 to itself makes the next number!
+        STORE   count   ; store it (for next loop)
+        SUB     limit   ; we need to compare with limit, subtracting helps
+        JLZ     start   ; if not yet at 255, keep going
+   end: JUMP    end     ; this "stops" the program!
+
+5. C0000003
+   00000000
+   000000FF
+   00000001
+   30000008
+   40000002
+   10000001
+   50000003 
+   E0000004
+   C0000009
+
+6.      JMP     start   ; begin by jumping over the data area
+  num1: 0               ; create some nums to store our values
+  num2: 0               ;
+   gcd: 0               ; greatest common divisor
+ start: READ    0x100   ; get the first value from port 0x100
+        STORE   num1    ; store it in num1
+        READ    0x100   ; get the second value from port 0x100
+        STORE   num2    ; store it in num2
+        ADD     0x01    ; increase the value by one for looping (we'll subtract it again before the first check)
+        STORE   gcd     ; put the value of num2 in gcd too as the greatest potential gcd
+  loop: LOAD    gcd     ; get the current gcd
+        SUB     0x01    ; subtract one from it to move to the next lowest potential gcd
+        STORE   gcd     ; store that value to check later
+        LOAD    num1    ; put num1 in the accumulator
+        MOD     gcd     ; get the remainder of the current guess of the gcd
+        JLZ     loop    ; if not zero, then not a divisor so try next number (checks lower)
+        JGZ     loop    ; if not zero, then not a divisor so try next number (checks upper)
+        LOAD    num2    ; put num2 in the accumulator and compleat the same process
+        MOD     gcd     ; 
+        JLZ     loop    ; 
+        JGZ     loop    ; if you get past this line without jumping you found the gcf
+        LOAD    gcf     ; put the gcd in the accumulator 
+        WRITE   0x200   ; write the gcd to port 0x200
+   end: JUMP    end     ; this "stops" the program!
+
+
+7.      JMP     start   ; jump data area
+ temp1: 0               ; extra spaces to store data
+ temp2: 0               ; 
+ start: STORE   temp1   ; put the value in the accumulator into one of the temp variables
+        LOAD    0x30AA  ; put the 0x30AA in the accumulator
+        STORE   temp2   ; put the 0x30AA in the other temp var
+        LOAD    temp1   ; get original value back
+        WRITE   0x30AA  ; put the original accumulator value into the 0x30AA memory address
+        LOAD    temp2   ; put the value from 0x30AA into the accumulator
+
+8.      JGZ     0x837BBE1   ; jump to 0x837BBE1 if accumulator is greater than zero
+        JZ      0x837BBE1   ; jump to 0x837BBE1 if accumulator is zero
+
+9. Part 1: The sequence of instructions effectivly swapps the data held in r8 and r9 with each other
+   Part 2: That effect happens because the XOR function effectivly returns the first input if the result
+           is XOR'd with the second input. Therefore flipping which location the result is stored in the
+           second and third lines flips the data that was in those two spots

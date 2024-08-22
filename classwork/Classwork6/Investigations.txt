@@ -1,0 +1,76 @@
+Investigation #1: Write first 10 Fibbonaci numbers
+
+        JMP     start
+   n1:  0
+   n2:  1
+count:  0
+ temp:  0
+limit:  8
+start:  LOAD    n1
+        WRITE   0xFF
+        LOAD    n2
+        WRITE   0xFF
+  top:  LOAD    n1
+        ADD     n2
+        STORE   temp
+        WRITE   0xFF
+        LOAD    n2
+        STORE   n1
+        LOAD    temp
+        STORE   n1
+        LOAD    count
+        ADD     0x01
+        STORE   count
+        SUB     limit
+        JLZ     top         // JLZ = jump if less than zero     top = where to jump
+
+
+
+Investigation #2: Write "Hello, world"
+
+// decimal
+// A = 65
+// H = 72 = 0100 0110 = 0x00000046
+// " " = 0x00000020
+// e = E +32 = 69 + 32 = 101 = ...
+// WRITE 0x378
+//
+// assume port written to understands Hex values are UTF-32 (based on https://www.fileformat.info/info/charset/UTF-32/list.htm)
+
+        JMP         start
+    A:  0x00000041
+    a:  0x00000061          // adds 0x20 (32 decimal) to A to switch to lowercase
+comma:  0x0000002C
+start:  LOAD        A
+        ADD         0x7     // adds 7 becasue H is the 7th letter after A
+        WRITE       0x378   // should write "H" (as a UTF-32 hex value) to port 888
+        LOAD        a
+        ADD         0x4
+        WRITE       0x378   // should write "e"
+        LOAD        a
+        ADD         0xB
+        WRITE       0x378   // should write "l"
+        WRITE       0x378   // should write "l" again becasue we haven't loaded anything else
+        LOAD        a
+        ADD         0xE
+        WRITE       0x378   // o
+        LOAD        comma
+        WRITE       0x378   // ,
+        LOAD        a
+        ADD         0x#     // incomplete
+        WRITE       0x378   // w
+        LOAD        a
+        ADD         0x#     // incomplete
+        WRITE       0x378   // o
+        LOAD        a
+        ADD         0x#     // incomplete
+        WRITE       0x378   // r
+        LOAD        a
+        ADD         0xB
+        WRITE       0x378   // l
+        LOAD        a
+        ADD         0x#     // incomplete
+        WRITE       0x378   // d
+    
+
+Investigation #3: is "RACECAR" palindrome
